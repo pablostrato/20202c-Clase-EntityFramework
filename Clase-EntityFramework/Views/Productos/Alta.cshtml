@@ -1,0 +1,20 @@
+﻿@model DAL.Producto
+@{
+    ViewBag.Title = "Alta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Alta Producto</h2>
+
+<form action="/productos/Alta" method="post">
+
+    <div>
+        Nombre: @Html.EditorFor(Model => Model.Nombre)
+    </div>
+    <div>
+        Precio: @Html.EditorFor(Model => Model.Precio)
+    </div>
+
+    <input type="submit" value="Crear" />
+</form>
+

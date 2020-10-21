@@ -10,12 +10,25 @@ namespace Clase_EntityFramework.Controllers
 {
     public class ProductosController : Controller
     {
+        ProductoServicio prodServicio = new ProductoServicio();
+
         // GET: Productos
         public ActionResult Lista()
         {
-            ProductoServicio prodServicio = new ProductoServicio();
             List<Producto> productos = prodServicio.ObtenerTodos();
             return View(productos);
+        }
+
+        public ActionResult Alta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Alta(Producto p)
+        {
+            prodServicio.Alta(p);
+            return Redirect("/productos/lista");
         }
     }
 }
