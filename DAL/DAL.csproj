@@ -51,6 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepositorio.cs" />
+    <Compile Include="Marca.cs">
+      <DependentUpon>SupermercadoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MarcaRepositorio.cs" />
     <Compile Include="ProductoRepositorio.cs" />
     <Compile Include="Producto.cs">
       <DependentUpon>SupermercadoDB.tt</DependentUpon>

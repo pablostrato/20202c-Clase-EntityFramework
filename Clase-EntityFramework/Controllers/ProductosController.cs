@@ -10,7 +10,16 @@ namespace Clase_EntityFramework.Controllers
 {
     public class ProductosController : Controller
     {
-        ProductoServicio prodServicio = new ProductoServicio();
+        ProductoServicio prodServicio;
+        MarcaServicio marcaServicio;
+
+
+        public ProductosController()
+        {
+            Entities contexto = new Entities();
+            prodServicio = new ProductoServicio(contexto);
+            marcaServicio = new MarcaServicio(contexto);
+        }
 
         // GET: Productos
         public ActionResult Lista()
@@ -31,6 +40,9 @@ namespace Clase_EntityFramework.Controllers
             {
                 return View();
             }
+
+            Marca m1 = marcaServicio.ObtenerTodos().FirstOrDefault();
+            p.Marca = m1;
 
             prodServicio.Alta(p);
             return Redirect("/productos/lista");

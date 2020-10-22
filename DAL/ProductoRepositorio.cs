@@ -9,11 +9,11 @@ namespace DAL
 {
     public class ProductoRepositorio
     {
-        Entities ctx = new Entities();
+        Entities ctx;
 
-        public ProductoRepositorio()
+        public ProductoRepositorio(Entities contexto)
         {
-
+            ctx = contexto;
         }
         //Eliminar
         //ObtenerTodos

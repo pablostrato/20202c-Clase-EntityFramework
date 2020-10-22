@@ -9,7 +9,13 @@ namespace Servicios
 {
     public class ProductoServicio
     {
-        ProductoRepositorio repo = new ProductoRepositorio();
+        ProductoRepositorio repo;
+
+        public ProductoServicio(Entities contexto)
+        {
+            Entities ctx = contexto;
+            repo = new ProductoRepositorio(ctx);
+        }
 
         public void Alta(Producto p)
         {
