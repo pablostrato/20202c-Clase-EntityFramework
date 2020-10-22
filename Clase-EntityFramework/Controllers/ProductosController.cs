@@ -27,6 +27,11 @@ namespace Clase_EntityFramework.Controllers
         [HttpPost]
         public ActionResult Alta(Producto p)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             prodServicio.Alta(p);
             return Redirect("/productos/lista");
         }

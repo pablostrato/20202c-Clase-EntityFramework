@@ -71,6 +71,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SupermercadoDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones\Producto.cs" />
+    <Compile Include="Validaciones\ProductoMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="SupermercadoDB.edmx">

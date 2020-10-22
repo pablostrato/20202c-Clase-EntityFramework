@@ -10,11 +10,17 @@
 
     <div>
         Nombre: @Html.EditorFor(Model => Model.Nombre)
+        @Html.ValidationMessageFor(Model => Model.Nombre)
     </div>
     <div>
         Precio: @Html.EditorFor(Model => Model.Precio)
+        @Html.ValidationMessageFor(Model => Model.Precio)
     </div>
 
     <input type="submit" value="Crear" />
 </form>
 
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
