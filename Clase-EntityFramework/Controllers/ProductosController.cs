@@ -21,7 +21,7 @@ namespace Clase_EntityFramework.Controllers
 
         public ActionResult Alta()
         {
-            return View();
+            return View(new Producto());
         }
 
         [HttpPost]
@@ -34,6 +34,32 @@ namespace Clase_EntityFramework.Controllers
 
             prodServicio.Alta(p);
             return Redirect("/productos/lista");
+        }
+
+        public ActionResult Cancelar()
+        {
+            return Redirect("/productos/lista");
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            Producto p = prodServicio.ObtenerPorId(id);
+            return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(Producto p, string accion)
+        {
+            switch (accion)
+            {
+                case "Eliminar":
+                    prodServicio.Eliminar(p.IdProducto);
+                    return Redirect("/productos/lista");
+
+                case "Cancelar":
+                    return Redirect("/productos/lista");
+            }
+            return View();
         }
     }
 }

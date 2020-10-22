@@ -1,0 +1,16 @@
+﻿@model DAL.Producto
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar Producto</h2>
+<form action="/productos/eliminar" method="post">
+    @Html.HiddenFor(Model => Model.IdProducto)
+    <p>
+        Esta seguro que desea eliminar el producto @Model.Nombre?
+    </p>
+
+    <input type="submit" name="accion" value="Eliminar" />
+    <input type="submit" name="accion" value="Cancelar" />
+</form>
