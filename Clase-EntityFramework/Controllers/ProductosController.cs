@@ -60,12 +60,21 @@ namespace Clase_EntityFramework.Controllers
         }
 
         [HttpPost]
-        public ActionResult Alta(Producto p)
+        public ActionResult Alta(Producto p, string otraMarca)
         {
             if (!ModelState.IsValid)
             {
                 CargarMarcasEnViewBag();
                 return View();
+            }
+
+            if (!string.IsNullOrEmpty(otraMarca))
+            {
+                Marca marca = new Marca();
+                marca.Nombre = otraMarca;
+                marcaServicio.Alta(marca);
+
+                p.Marca = marca;
             }
 
             prodServicio.Alta(p);
