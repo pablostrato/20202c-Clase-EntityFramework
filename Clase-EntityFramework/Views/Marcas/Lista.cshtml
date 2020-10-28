@@ -1,0 +1,22 @@
+﻿@model List<DAL.Marca>
+@{
+    ViewBag.Title = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista</h2>
+
+<table>
+    <tr>
+        <th>Marca</th>
+        <th>Productos</th>
+    </tr>
+    @foreach (DAL.Marca m in Model)
+    {
+        <tr>
+            <td>@m.Nombre</td>
+            <td>@m.Productoes.Count</td>
+        </tr>
+    }
+</table>
+
