@@ -37,6 +37,11 @@ namespace Servicios
              repo.Eliminar(idProducto);
         }
 
+        public List<Producto> ObtenerPorMarca(int? idMarca)
+        {
+            return repo.ObtenerPorMarca(idMarca);
+        }
+
         public void Modificar(Producto p)
         {
              repo.Modificar(p);

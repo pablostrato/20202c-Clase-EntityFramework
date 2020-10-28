@@ -2,11 +2,42 @@
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<DAL.Marca> marcas = ViewBag.Marcas as List<DAL.Marca>;
+
+    List<SelectListItem> marcasItems = marcas.Select(o => new SelectListItem()
+    {
+        Text = o.Nombre,
+        Value = o.IdMarca.ToString()
+    }).ToList();
+
+    marcasItems.Insert(0, new SelectListItem() { Value = "", Text = "Seleccione Marca" });
+
+    int? idMarcaElegida = (int?)ViewBag.IdMarcaElegida;
 }
 
 <h2>Lista de Productos</h2>
 
 <a href="/productos/alta">Crear Producto</a>
+
+<form action="/productos/listapost" method="post">
+    Marca:
+    <select name="idMarca">
+        @foreach (SelectListItem m in marcasItems)
+        {
+            if (idMarcaElegida.HasValue && idMarcaElegida.Value.ToString() == m.Value)
+            {
+                <option value="@m.Value" selected="selected">@m.Text</option>
+            }
+            else
+            {
+                <option value="@m.Value">@m.Text</option>
+            }
+        }
+    </select>
+
+    <input type="submit" name="Filtrar" value="Filtrar" />
+</form>
 <table>
     <tr>
         <th>Nombre</th>
@@ -17,13 +48,13 @@
 
     @foreach (var p in Model)
     {
-<tr>
-    <td><a href="/productos/modificar/@p.IdProducto">@p.Nombre</a></td>
-    <td>@p.Precio</td>
-    <td>@(p.Marca?.Nombre)</td>
-    @*<td>@(p.Marca == null ? "Sin marca" : p.Marca.Nombre)</td>*@
-    <td><a href="/productos/eliminar/@p.IdProducto">Eliminar</a></td>
-</tr>
+        <tr>
+            <td><a href="/productos/modificar/@p.IdProducto">@p.Nombre</a></td>
+            <td>@p.Precio</td>
+            <td>@(p.Marca?.Nombre)</td>
+            @*<td>@(p.Marca == null ? "Sin marca" : p.Marca.Nombre)</td>*@
+            <td><a href="/productos/eliminar/@p.IdProducto">Eliminar</a></td>
+        </tr>
     }
 
 </table>

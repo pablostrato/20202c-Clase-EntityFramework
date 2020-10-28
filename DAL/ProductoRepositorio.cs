@@ -48,6 +48,11 @@ namespace DAL
             return p;
         }
 
+        public List<Producto> ObtenerPorMarca(int? idMarca)
+        {
+            return ctx.Productoes.Where(o => o.IdMarca == idMarca).ToList();
+        }
+
         public void Eliminar(int idProducto)
         {
             Producto p = ObtenerPorId(idProducto);

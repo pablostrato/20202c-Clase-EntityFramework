@@ -23,11 +23,27 @@ namespace Clase_EntityFramework.Controllers
         }
 
         // GET: Productos
-        public ActionResult Lista()
+        public ActionResult Lista(int? id)
         {
-            List<Producto> productos = prodServicio.ObtenerTodos();
+            List<Producto> productos;
+            CargarMarcasEnViewBag();
+            if (id.HasValue)
+            {
+                ViewBag.IdMarcaElegida = id.Value;
+                productos = prodServicio.ObtenerPorMarca(id);
+            }
+            else
+            {
+                productos = prodServicio.ObtenerTodos();
+            }
 
             return View(productos);
+        }
+
+        [HttpPost]
+        public ActionResult ListaPost(int? idMarca)
+        {
+            return Redirect($"/productos/lista/{idMarca}");
         }
 
         public ActionResult Alta()
