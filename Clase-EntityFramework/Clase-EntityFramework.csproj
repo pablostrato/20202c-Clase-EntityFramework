@@ -170,6 +170,7 @@
     <Content Include="Views\Productos\Lista.cshtml" />
     <Content Include="Views\Productos\Alta.cshtml" />
     <Content Include="Views\Productos\Eliminar.cshtml" />
+    <Content Include="Views\Productos\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,7 +17,7 @@
     @foreach (var p in Model)
     {
         <tr>
-            <td>@p.Nombre</td>
+            <td><a href="/productos/modificar/@p.IdProducto">@p.Nombre</a></td>
             <td>@p.Precio</td>
             <td><a href="/productos/eliminar/@p.IdProducto">Eliminar</a></td>
         </tr>

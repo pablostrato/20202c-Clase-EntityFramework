@@ -1,0 +1,23 @@
+﻿@model DAL.Producto
+@{
+    ViewBag.Title = "Modificar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Modificar</h2>
+
+<form action="/productos/modificar" method="post">
+    <input type="hidden" name="IdProducto" value="@Model.IdProducto" />
+
+    <div>
+        Nombre: @Html.TextBoxFor(m => m.Nombre, new { @class="pepito", data_id="2" })
+        @Html.ValidationMessageFor(Model => Model.Nombre)
+    </div>
+    <div>
+        Precio: @Html.TextBoxFor(m => m.Precio)
+        @Html.ValidationMessageFor(Model => Model.Precio)
+    </div>
+
+    <input type="submit" value="Guardar" />
+</form>
+

@@ -3,6 +3,7 @@ using Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 
@@ -72,6 +73,25 @@ namespace Clase_EntityFramework.Controllers
                     return Redirect("/productos/lista");
             }
             return View();
+        }
+
+        public ActionResult Modificar(int id)
+        {
+            Producto prod = prodServicio.ObtenerPorId(id);
+            if (prod == null)
+            {
+                TempData["Message"] = "El producto elegido no existe";
+                return Redirect("/productos/lista");
+            }
+            return View(prod);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(Producto prod)
+        {
+            prodServicio.Modificar(prod);
+
+            return Redirect("/productos/lista");
         }
     }
 }
