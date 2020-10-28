@@ -18,8 +18,16 @@
 
 <form action="/productos/Alta" method="post">
 
+    @*Ejemplo con input en lugar de html helper editorfor*@
+    @*<div>
+
+        Nombre:
+        <input data-val="true" data-val-required="Nombre es requerido" name="Nombre" type="text" value="">
+        @Html.ValidationMessageFor(Model => Model.Nombre)
+    </div>*@
     <div>
-        Nombre: @Html.EditorFor(Model => Model.Nombre)
+
+        Nombre2: @Html.EditorFor(Model => Model.Nombre)
         @Html.ValidationMessageFor(Model => Model.Nombre)
     </div>
     <div>
