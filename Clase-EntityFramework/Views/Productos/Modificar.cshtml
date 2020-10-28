@@ -2,6 +2,17 @@
 @{
     ViewBag.Title = "Modificar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<DAL.Marca> marcas = ViewBag.Marcas as List<DAL.Marca>;
+
+    List<SelectListItem> marcasItems = marcas.Select(o => new SelectListItem()
+    {
+        Text = o.Nombre,
+        Value = o.IdMarca.ToString(),
+        Selected = o.IdMarca == Model.IdMarca
+    }).ToList();
+
+    marcasItems.Insert(0, new SelectListItem() { Value = "0", Text = "Seleccione Marca" });
 }
 
 <h2>Modificar</h2>
@@ -10,7 +21,7 @@
     <input type="hidden" name="IdProducto" value="@Model.IdProducto" />
 
     <div>
-        Nombre: @Html.TextBoxFor(m => m.Nombre, new { @class="pepito", data_id="2" })
+        Nombre: @Html.TextBoxFor(m => m.Nombre, new { @class = "pepito", data_id = "2" })
         @Html.ValidationMessageFor(Model => Model.Nombre)
     </div>
     <div>
@@ -18,6 +29,30 @@
         @Html.ValidationMessageFor(Model => Model.Precio)
     </div>
 
+    <div>
+        Marca: @Html.DropDownListFor(Model => Model.IdMarca, marcasItems)
+        @Html.ValidationMessageFor(Model => Model.IdMarca)
+    </div>
+
+    <div>
+        Marca2:
+        <select name="IdMarca2">
+            <option value="0">Seleccione Marca</option>
+            @foreach (DAL.Marca m in marcas)
+            {
+                if (m.IdMarca == Model.IdMarca)
+                {
+                    <option value="@m.IdMarca" selected="selected">@m.Nombre</option>
+                }
+                else
+                {
+                    <option value="@m.IdMarca">@m.Nombre</option>
+                }
+            }
+        </select>
+
+    </div>
     <input type="submit" value="Guardar" />
+    <input type="submit" name="accion" value="Cancelar" />
 </form>
 

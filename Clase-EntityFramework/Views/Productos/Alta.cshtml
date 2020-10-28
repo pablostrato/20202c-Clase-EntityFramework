@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "Alta";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<DAL.Marca> marcas = ViewBag.Marcas as List<DAL.Marca>;
+
+    List<SelectListItem> marcasItems = marcas.Select(o => new SelectListItem()
+    {
+        Text = o.Nombre,
+        Value = o.IdMarca.ToString()
+    }).ToList();
+
+    marcasItems.Insert(0, new SelectListItem() { Value = "0", Text = "Seleccione Marca" });
 }
 
 <h2>Alta Producto</h2>
@@ -16,8 +26,19 @@
         Precio: @Html.EditorFor(Model => Model.Precio)
         @Html.ValidationMessageFor(Model => Model.Precio)
     </div>
-
+    <div>
+        Marca: @Html.DropDownListFor(Model => Model.IdMarca, marcasItems)
+    </div>
+    @*<div>
+            Marca2: <select name="IdMarca2">
+                @foreach (DAL.Marca m in marcas)
+                {
+                    <option value="@m.IdMarca">@m.Nombre</option>
+                }
+            </select>
+        </div>*@
     <input type="submit" value="Crear" />
+    <input type="submit" name="accion" value="Cancelar" />
 </form>
 
 @section scripts {

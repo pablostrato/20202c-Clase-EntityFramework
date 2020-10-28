@@ -64,6 +64,7 @@ namespace DAL
             Producto prodActual = ObtenerPorId(p.IdProducto);
             prodActual.Nombre = p.Nombre;
             prodActual.Precio = p.Precio;
+            prodActual.IdMarca = p.IdMarca;
 
             ctx.SaveChanges();
         }

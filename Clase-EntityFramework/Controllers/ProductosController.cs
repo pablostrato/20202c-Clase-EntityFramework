@@ -31,7 +31,15 @@ namespace Clase_EntityFramework.Controllers
 
         public ActionResult Alta()
         {
-            return View(new Producto());
+            CargarMarcasEnViewBag();
+
+            return View();
+        }
+
+        private void CargarMarcasEnViewBag()
+        {
+            List<Marca> marcas = marcaServicio.ObtenerTodos();
+            ViewBag.Marcas = marcas;
         }
 
         [HttpPost]
@@ -39,11 +47,9 @@ namespace Clase_EntityFramework.Controllers
         {
             if (!ModelState.IsValid)
             {
+                CargarMarcasEnViewBag();
                 return View();
             }
-
-            Marca m1 = marcaServicio.ObtenerTodos().FirstOrDefault();
-            p.Marca = m1;
 
             prodServicio.Alta(p);
             return Redirect("/productos/lista");
@@ -83,12 +89,20 @@ namespace Clase_EntityFramework.Controllers
                 TempData["Message"] = "El producto elegido no existe";
                 return Redirect("/productos/lista");
             }
+
+            CargarMarcasEnViewBag();
             return View(prod);
         }
 
         [HttpPost]
         public ActionResult Modificar(Producto prod)
         {
+            if (!ModelState.IsValid)
+            {
+                CargarMarcasEnViewBag();
+                return View(prod);
+            }
+
             prodServicio.Modificar(prod);
 
             return Redirect("/productos/lista");
