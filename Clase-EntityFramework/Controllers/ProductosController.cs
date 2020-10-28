@@ -26,6 +26,7 @@ namespace Clase_EntityFramework.Controllers
         public ActionResult Lista()
         {
             List<Producto> productos = prodServicio.ObtenerTodos();
+
             return View(productos);
         }
 
