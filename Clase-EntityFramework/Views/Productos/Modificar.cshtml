@@ -52,6 +52,23 @@
         </select>
 
     </div>
+
+    <div>
+        Categorias:
+        @foreach (DAL.Categoria cat in ViewBag.Categorias as List<DAL.Categoria>)
+        {
+        <div>
+            @if (Model.Categorias.Select(o => o.IdCategoria).Contains(cat.IdCategoria))
+            {
+                @cat.Nombre <input type="checkbox" checked="checked" name="idCategoria" value="@cat.IdCategoria" />
+            }
+            else
+            {
+                @cat.Nombre <input type="checkbox" name="idCategoria" value="@cat.IdCategoria" />
+            }
+        </div>
+        }
+    </div>
     <input type="submit" value="Guardar" />
     <input type="submit" name="accion" value="Cancelar" />
 </form>

@@ -141,12 +141,18 @@ namespace Clase_EntityFramework.Controllers
         }
 
         [HttpPost]
-        public ActionResult Modificar(Producto prod)
+        public ActionResult Modificar(Producto prod, int[] idCategoria)
         {
             if (!ModelState.IsValid)
             {
                 CargarMarcasEnViewBag();
                 return View(prod);
+            }
+
+            if (idCategoria.Length > 0)
+            {
+                List<Categoria> categoriasElegidas = catServicio.ObtenerPorIds(idCategoria);
+                prod.Categorias = categoriasElegidas;
             }
 
             prodServicio.Modificar(prod);

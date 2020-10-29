@@ -42,6 +42,10 @@ namespace DAL
             prodActual.Precio = p.Precio;
             prodActual.IdMarca = p.IdMarca;
 
+            prodActual.Categorias.Clear();
+
+            prodActual.Categorias = p.Categorias;
+
             ctx.SaveChanges();
         }
 
