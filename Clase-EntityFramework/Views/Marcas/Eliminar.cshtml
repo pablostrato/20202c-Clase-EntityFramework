@@ -1,0 +1,24 @@
+﻿@model DAL.Marca
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar Marca</h2>
+<form action="/marcas/eliminar" method="post">
+    @Html.HiddenFor(Model => Model.IdMarca)
+    <p>
+        Esta seguro que desea eliminar la marca <strong>@Model.Nombre</strong> que tiene estos productos?
+        <ul>
+            @foreach (DAL.Producto p in Model.Productoes)
+            {
+                <li>
+                    @p.Nombre
+                </li>
+            }
+        </ul>
+    </p>
+
+    <input type="submit" name="accion" value="Eliminar" />
+    <input type="submit" name="accion" value="Cancelar" />
+</form>

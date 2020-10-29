@@ -44,10 +44,23 @@ namespace DAL
 
         public void Eliminar(int idMarca)
         {
-            Marca p = ObtenerPorId(idMarca);
-            if (p != null)
+            ProductoRepositorio prodRepositorio = new ProductoRepositorio(ctx);
+
+            Marca m = ObtenerPorId(idMarca);
+
+            //opcion para que los productos ahora tengan idmarca = null
+            //m.Productoes.Clear();
+
+
+            //eliminar cada producto de la marca
+            foreach (Producto p in m.Productoes.ToList())
             {
-                ctx.Marcas.Remove(p);
+                prodRepositorio.Eliminar(p.IdProducto);    
+            }
+
+            if (m != null)
+            {
+                ctx.Marcas.Remove(m);
             }
 
             ctx.SaveChanges();

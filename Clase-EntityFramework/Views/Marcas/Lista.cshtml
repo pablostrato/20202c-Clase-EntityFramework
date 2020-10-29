@@ -10,12 +10,14 @@
     <tr>
         <th>Marca</th>
         <th>Productos</th>
+        <th>Eliminar</th>
     </tr>
     @foreach (DAL.Marca m in Model)
     {
         <tr>
             <td>@m.Nombre</td>
             <td>@m.Productoes.Count</td>
+            <td><a href="/marcas/eliminar/@m.IdMarca">Eliminar</a></td>
         </tr>
     }
 </table>

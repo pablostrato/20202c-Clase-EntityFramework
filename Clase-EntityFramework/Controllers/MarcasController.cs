@@ -23,5 +23,24 @@ namespace Clase_EntityFramework.Controllers
             List<Marca> marcas = marcaServicio.ObtenerTodos();
             return View(marcas);
         }
+
+        public ActionResult Eliminar(int id)
+        {
+            Marca m = marcaServicio.ObtenerPorId(id);
+            return View(m);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(Marca m)
+        {
+            marcaServicio.Eliminar(m.IdMarca);
+            return Redirect("/marcas/lista");
+        }
+
+
+        public ActionResult Cancelar()
+        {
+            return Redirect("/marcas/lista");
+        }
     }
 }
