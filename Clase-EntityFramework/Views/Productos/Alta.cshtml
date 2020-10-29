@@ -21,10 +21,10 @@
     @*Ejemplo con input en lugar de html helper editorfor*@
     @*<div>
 
-        Nombre:
-        <input data-val="true" data-val-required="Nombre es requerido" name="Nombre" type="text" value="">
-        @Html.ValidationMessageFor(Model => Model.Nombre)
-    </div>*@
+            Nombre:
+            <input data-val="true" data-val-required="Nombre es requerido" name="Nombre" type="text" value="">
+            @Html.ValidationMessageFor(Model => Model.Nombre)
+        </div>*@
     <div>
 
         Nombre2: @Html.EditorFor(Model => Model.Nombre)
@@ -38,6 +38,16 @@
         Marca: @Html.DropDownListFor(Model => Model.IdMarca, marcasItems)
 
         Otra Marca: <input type="text" name="OtraMarca" value="" />
+    </div>
+
+    <div>
+        Categorias:
+        @foreach (DAL.Categoria cat in ViewBag.Categorias as List<DAL.Categoria>)
+        {
+            <div>
+                @cat.Nombre <input type="checkbox" name="idCategoria" value="@cat.IdCategoria" />
+            </div>
+        }
     </div>
     @*<div>
             Marca2: <select name="IdMarca2">

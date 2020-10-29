@@ -12,21 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Producto
+    public partial class Categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Producto()
+        public Categoria()
         {
-            this.Categorias = new HashSet<Categoria>();
+            this.Productoes = new HashSet<Producto>();
         }
     
-        public int IdProducto { get; set; }
+        public int IdCategoria { get; set; }
         public string Nombre { get; set; }
-        public Nullable<decimal> Precio { get; set; }
-        public Nullable<int> IdMarca { get; set; }
     
-        public virtual Marca Marca { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Categoria> Categorias { get; set; }
+        public virtual ICollection<Producto> Productoes { get; set; }
     }
 }

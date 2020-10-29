@@ -9,8 +9,6 @@ namespace DAL
 {
     public class MarcaRepositorio : BaseRepository<Marca>
     {
-        Entities ctx;
-
         public MarcaRepositorio(Entities contexto) : base(contexto)
         {
            

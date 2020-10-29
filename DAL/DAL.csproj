@@ -51,10 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="Categoria.cs">
+      <DependentUpon>SupermercadoDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="IRepositorio.cs" />
     <Compile Include="Marca.cs">
       <DependentUpon>SupermercadoDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="CategoriaRepositorio.cs" />
     <Compile Include="MarcaRepositorio.cs" />
     <Compile Include="ProductoRepositorio.cs" />
     <Compile Include="Producto.cs">

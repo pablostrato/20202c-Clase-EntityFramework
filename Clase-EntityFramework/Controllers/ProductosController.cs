@@ -13,6 +13,7 @@ namespace Clase_EntityFramework.Controllers
     {
         ProductoServicio prodServicio;
         MarcaServicio marcaServicio;
+        CategoriaServicio catServicio;
 
 
         public ProductosController()
@@ -20,6 +21,7 @@ namespace Clase_EntityFramework.Controllers
             Entities contexto = new Entities();
             prodServicio = new ProductoServicio(contexto);
             marcaServicio = new MarcaServicio(contexto);
+            catServicio = new CategoriaServicio(contexto);
         }
 
         // GET: Productos
@@ -48,9 +50,15 @@ namespace Clase_EntityFramework.Controllers
 
         public ActionResult Alta()
         {
-            CargarMarcasEnViewBag();
+            CargarListasEnViewBag();
 
             return View();
+        }
+
+        private void CargarListasEnViewBag()
+        {
+            CargarMarcasEnViewBag();
+            CargarCategoriasEnViewBag();
         }
 
         private void CargarMarcasEnViewBag()
@@ -59,12 +67,18 @@ namespace Clase_EntityFramework.Controllers
             ViewBag.Marcas = marcas;
         }
 
+        private void CargarCategoriasEnViewBag()
+        {
+            List<Categoria> categorias = catServicio.ObtenerTodos();
+            ViewBag.Categorias = categorias;
+        }
+
         [HttpPost]
-        public ActionResult Alta(Producto p, string otraMarca)
+        public ActionResult Alta(Producto p, string otraMarca, int[] idCategoria)
         {
             if (!ModelState.IsValid)
             {
-                CargarMarcasEnViewBag();
+                CargarListasEnViewBag();
                 return View();
             }
 
@@ -75,6 +89,12 @@ namespace Clase_EntityFramework.Controllers
                 marcaServicio.Alta(marca);
 
                 p.Marca = marca;
+            }
+
+            if (idCategoria.Length > 0)
+            {
+                List<Categoria> categoriasElegidas = catServicio.ObtenerPorIds(idCategoria);
+                p.Categorias = categoriasElegidas;
             }
 
             prodServicio.Alta(p);
@@ -116,7 +136,7 @@ namespace Clase_EntityFramework.Controllers
                 return Redirect("/productos/lista");
             }
 
-            CargarMarcasEnViewBag();
+            CargarListasEnViewBag();
             return View(prod);
         }
 
