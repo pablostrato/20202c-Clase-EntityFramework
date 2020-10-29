@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    //interface IRepositorio<T> 
-    //{
-    //    Entities Contexto { get; set; }
+    interface IRepositorio<T>
+    {
+        void Alta(T m);
 
-    //    void Alta(T)
+        List<T> ObtenerTodos();
 
-    //}
+        T ObtenerPorId(int id);
+
+        void Eliminar(int id);
+
+        void Modificar(T m);
+
+    }
 }

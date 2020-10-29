@@ -7,42 +7,16 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MarcaRepositorio
+    public class MarcaRepositorio : BaseRepository<Marca>
     {
         Entities ctx;
 
-        public MarcaRepositorio(Entities contexto)
+        public MarcaRepositorio(Entities contexto) : base(contexto)
         {
-            ctx = contexto;
+           
         }
 
-        //Eliminar
-        //ObtenerTodos
-        //ObtenerPorId
-        //Modificar
-
-        public void Alta(Marca m)
-        {
-            ctx.Marcas.Add(m);
-            ctx.SaveChanges();
-        }
-
-        public List<Marca> ObtenerTodos()
-        {
-            return ctx.Marcas.ToList();
-        }
-
-        public Marca ObtenerPorId(int idMarca)
-        {
-            Marca p;
-            
-            //Find
-            p = ctx.Marcas.Find(idMarca);
-
-            return p;
-        }
-
-        public void Eliminar(int idMarca)
+        public override void Eliminar(int idMarca)
         {
             ProductoRepositorio prodRepositorio = new ProductoRepositorio(ctx);
 
@@ -66,7 +40,7 @@ namespace DAL
             ctx.SaveChanges();
         }
 
-        public void Modificar(Marca m)
+        public override void Modificar(Marca m)
         {
             Marca prodActual = ObtenerPorId(m.IdMarca);
             prodActual.Nombre = m.Nombre;

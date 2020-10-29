@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
     <Compile Include="IRepositorio.cs" />
     <Compile Include="Marca.cs">
       <DependentUpon>SupermercadoDB.tt</DependentUpon>

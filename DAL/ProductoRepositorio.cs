@@ -7,31 +7,13 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class ProductoRepositorio
+    public class ProductoRepositorio : BaseRepository<Producto>
     {
-        Entities ctx;
-
-        public ProductoRepositorio(Entities contexto)
+        public ProductoRepositorio(Entities contexto) : base(contexto)
         {
-            ctx = contexto;
         }
-        //Eliminar
-        //ObtenerTodos
-        //ObtenerPorId
-        //Modificar
-
-        public void Alta(Producto p)
-        {
-            ctx.Productoes.Add(p);
-            ctx.SaveChanges();
-        }
-
-        public List<Producto> ObtenerTodos()
-        {
-            return ctx.Productoes.ToList();
-        }
-
-        public Producto ObtenerPorId(int idProducto)
+    
+        public override Producto ObtenerPorId(int idProducto)
         {
             Producto p;
             //LinQ
@@ -53,18 +35,7 @@ namespace DAL
             return ctx.Productoes.Where(o => o.IdMarca == idMarca).ToList();
         }
 
-        public void Eliminar(int idProducto)
-        {
-            Producto p = ObtenerPorId(idProducto);
-            if (p != null)
-            {
-                ctx.Productoes.Remove(p);
-            }
-
-            ctx.SaveChanges();
-        }
-
-        public void Modificar(Producto p)
+        public override void Modificar(Producto p)
         {
             Producto prodActual = ObtenerPorId(p.IdProducto);
             prodActual.Nombre = p.Nombre;
