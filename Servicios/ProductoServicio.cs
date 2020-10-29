@@ -7,44 +7,16 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public class ProductoServicio
+    public class ProductoServicio : BaseServicio<ProductoRepositorio, Producto>
     {
-        ProductoRepositorio repo;
-
-        public ProductoServicio(Entities contexto)
+        public ProductoServicio(Entities contexto) : base(contexto)
         {
-            Entities ctx = contexto;
-            repo = new ProductoRepositorio(ctx);
+            
         }
-
-        public void Alta(Producto p)
-        {
-            repo.Alta(p);  
-        }
-
-        public List<Producto> ObtenerTodos()
-        {
-            return repo.ObtenerTodos();
-        }
-
-        public Producto ObtenerPorId(int idProducto)
-        {
-            return repo.ObtenerPorId(idProducto);
-        }
-
-        public void Eliminar(int idProducto)
-        {
-             repo.Eliminar(idProducto);
-        }
-
+        
         public List<Producto> ObtenerPorMarca(int? idMarca)
         {
             return repo.ObtenerPorMarca(idMarca);
-        }
-
-        public void Modificar(Producto p)
-        {
-             repo.Modificar(p);
         }
     }
 }

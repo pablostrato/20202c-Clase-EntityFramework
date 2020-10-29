@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseServicio.cs" />
+    <Compile Include="IServicio.cs" />
     <Compile Include="MarcaServicio.cs" />
     <Compile Include="ProductoServicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
