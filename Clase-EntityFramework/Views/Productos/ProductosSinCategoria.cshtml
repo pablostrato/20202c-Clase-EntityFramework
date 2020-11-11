@@ -1,0 +1,28 @@
+﻿@model List<DAL.Producto>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ProductosSinCategoria";
+}
+
+
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Marca</th>
+        <th>Eliminar</th>
+    </tr>
+
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td><a href="/productos/modificar/@p.IdProducto">@p.Nombre</a></td>
+            <td>@p.Precio</td>
+            <td>@(p.Marca?.Nombre)</td>
+            @*<td>@(p.Marca == null ? "Sin marca" : p.Marca.Nombre)</td>*@
+            <td><a href="/productos/eliminar/@p.IdProducto">Eliminar</a></td>
+        </tr>
+    }
+
+</table>
+

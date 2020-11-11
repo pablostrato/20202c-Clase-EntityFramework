@@ -14,11 +14,12 @@ namespace Clase_EntityFramework.Controllers
         ProductoServicio prodServicio;
         MarcaServicio marcaServicio;
         CategoriaServicio catServicio;
+        Entities contexto;
 
 
         public ProductosController()
         {
-            Entities contexto = new Entities();
+            contexto = new Entities();
             prodServicio = new ProductoServicio(contexto);
             marcaServicio = new MarcaServicio(contexto);
             catServicio = new CategoriaServicio(contexto);
@@ -158,6 +159,12 @@ namespace Clase_EntityFramework.Controllers
             prodServicio.Modificar(prod);
 
             return Redirect("/productos/lista");
+        }
+
+        public ActionResult ProductosSinCategoria()
+        {
+            List<DAL.Producto> productosSinCat = contexto.ObtenerProductosSinCategoria().ToList();
+            return View(productosSinCat);
         }
     }
 }

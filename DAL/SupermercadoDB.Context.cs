@@ -12,6 +12,8 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -28,5 +30,15 @@ namespace DAL
         public virtual DbSet<Producto> Productoes { get; set; }
         public virtual DbSet<Marca> Marcas { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
+    
+        public virtual ObjectResult<Producto> ObtenerProductosSinCategoria()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Producto>("ObtenerProductosSinCategoria");
+        }
+    
+        public virtual ObjectResult<Producto> ObtenerProductosSinCategoria(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Producto>("ObtenerProductosSinCategoria", mergeOption);
+        }
     }
 }
